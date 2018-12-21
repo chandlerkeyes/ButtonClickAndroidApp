@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Button
 
 private val TAG = "MainActivity"
+private const val TEXT_CONTENTS = "TextContent"
 
 class MainActivity : AppCompatActivity() {
     /*initializing these variables as null starting out, the below widgets don't exist yet since we haven't set the
@@ -38,5 +39,42 @@ class MainActivity : AppCompatActivity() {
                 userInput.setText("")
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart: called")
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        textView?.text = savedInstanceState?.getString(TEXT_CONTENTS, "")
+        Log.d(TAG, "onRestoreInstanceState: called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume: called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause: called")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putString(TEXT_CONTENTS, textView?.text.toString())
+        Log.d(TAG, "onSaveInstanceState: called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop: called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: called")
     }
 }
